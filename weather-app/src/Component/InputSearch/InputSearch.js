@@ -77,12 +77,13 @@ function InputSearch() {
                 dataWeather && dataWeather.name ? (
                     <div>
                         <b className="name-country">  {dataWeather.name} </b> <b className=" name-country">{dataWeather["sys"]["country"]}</b>
-                        <div>{dataWeather["weather"]["0"]["main"]}</div>
+                        <br></br> <b>{dataWeather["weather"]["0"]["main"]}</b> <p>{dataWeather["weather"]["0"]["description"]}</p>
                         <div>{listIcon.filter((item) =>
                             (item.type === dataWeather["weather"]["0"]["main"])
-                        ).map((filterItem) => { return (<img style={{ width: "100px", height: "100px" }} src={filterItem.img}></img>) })}</div>
+                        ).map((filterItem, index) => { return (<img key={index} style={{ width: "100px", height: "100px" }} src={filterItem.img}></img>) })}</div>
                         <b> Temp {dataWeather["main"]["temp"]}  </b> <br></br>
-                        <b> Speed Wind {dataWeather["wind"]["speed"]}</b>
+                        <b> Speed Wind {dataWeather["wind"]["speed"]}</b> <br />
+                        <b> Humidity {dataWeather["main"]["humidity"]}</b>
                     </div>) : (<div></div>)
             }
         </div >
