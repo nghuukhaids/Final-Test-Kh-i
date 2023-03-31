@@ -1,0 +1,31 @@
+input {
+    width: 200px;
+    height: 40px;
+    position: relative;
+
+}
+
+i {
+    position: absolute;
+    left: 58%
+}
+
+form {
+    display: flex;
+    align-items: center;
+}
+
+.inputsearch {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
