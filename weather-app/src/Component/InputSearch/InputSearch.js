@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./InputSearch.css"
+import img from "../InputSearch/anh.avif"
 function InputSearch() {
     const [listIcon, setListIcon] = useState([
         {
@@ -65,14 +66,14 @@ function InputSearch() {
     }
 
 
+
     return (
         <div className='inputsearch d-flex flex-column'>
             <form style={{ marginBottom: "20px" }}>
                 <input name="location" value={formValue.location} onChange={handleFormValueChange} type='text' placeholder='Enter Your Location'></input>
                 <button id="search-btn" type="submit" onClick={handleFetch} class="btn btn-success"><i class="bi bi-search-heart-fill"></i></button>
             </form >
-            {error == "" ? (<div>{error}</div>) : (<></>)
-            }
+           
             {
                 dataWeather && dataWeather.name ? (
                     <div>
