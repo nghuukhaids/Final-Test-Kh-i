@@ -45,7 +45,7 @@ function InputSearch() {
     ])
     const [dataWeather, setDataWeather] = useState(null);
     const [formValue, setFormValue] = useState({ location: "" });
-    const [error, setError] = useState(null)
+    const [error, setError] = useState("");
     const handleFormValueChange = (event) => {
         setFormValue({ ...formValue, location: event.target.value })
     }
@@ -60,32 +60,31 @@ function InputSearch() {
             setFormValue({ location: "" })
         }
         catch (err) {
-            setError(err.message)
+            setError("Khong tim thay")
         }
     }
-    if (error) {
-        return <div>Something went wrong: {error}</div>
-    }
+
 
     return (
         <div className='inputsearch d-flex flex-column'>
-            <form>
+            <form style={{ marginBottom: "20px" }}>
                 <input name="location" value={formValue.location} onChange={handleFormValueChange} type='text' placeholder='Enter Your Location'></input>
-                <button type="submit" onClick={handleFetch} class="btn btn-success">Success</button>
+                <button id="search-btn" type="submit" onClick={handleFetch} class="btn btn-success"><i class="bi bi-search-heart-fill"></i></button>
             </form >
-            {dataWeather && dataWeather.name ? (
-                <div>
-                    <b>  {dataWeather.name} </b> <b>{dataWeather["sys"]["country"]}</b>
-                    <div>{dataWeather["weather"]["0"]["main"]}</div>
-                    <div>{listIcon.filter((item) =>
-                        (item.type === dataWeather["weather"]["0"]["main"])
-                    ).map((filterItem) => { return (<img style={{ width: "100px", height: "100px" }} src={filterItem.img}></img>) })}</div>
-                    <div> Temp {dataWeather["main"]["temp"]}  C</div>
-                    <div> Speed Wind {dataWeather["wind"]["speed"]}</div>
-                </div>) : (<></>)
+            {error == "" ? (<div>{error}</div>) : (<></>)
             }
-
-
+            {
+                dataWeather && dataWeather.name ? (
+                    <div>
+                        <b className="name-country">  {dataWeather.name} </b> <b className=" name-country">{dataWeather["sys"]["country"]}</b>
+                        <div>{dataWeather["weather"]["0"]["main"]}</div>
+                        <div>{listIcon.filter((item) =>
+                            (item.type === dataWeather["weather"]["0"]["main"])
+                        ).map((filterItem) => { return (<img style={{ width: "100px", height: "100px" }} src={filterItem.img}></img>) })}</div>
+                        <b> Temp {dataWeather["main"]["temp"]}  </b> <br></br>
+                        <b> Speed Wind {dataWeather["wind"]["speed"]}</b>
+                    </div>) : (<div></div>)
+            }
         </div >
     )
 }
