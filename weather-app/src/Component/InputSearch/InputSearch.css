@@ -9,14 +9,14 @@ input {
 form {
     display: flex;
     align-items: center;
+    margin:0
 }
 
 .inputsearch {
-    height: 60%;
     display: flex;
     align-items: center;
     justify-content: start;
-    background-color: rgba(119, 252, 119, 0.515)
+    background-color: rgba(119, 252, 119, 0.515);
 
 }
 
@@ -41,8 +41,8 @@ button {
 .name-country {
     font-size: 30px
 }
-.not-found-pic{
-    width:100px;
-    margin-top:30px
 
+.not-found-pic {
+    width: 100px;
+    margin-top: 30px
 }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import "./InputSearch.css"
-import img from "../InputSearch/anh.avif"
+import React, { useState } from 'react';
+import "./InputSearch.css";
+import sad from "../InputSearch/anh.avif";
 function InputSearch() {
     const [listIcon, setListIcon] = useState([
         {
@@ -44,36 +44,31 @@ function InputSearch() {
             img: "https://cdn-icons-png.flaticon.com/512/3076/3076129.png",
         },
     ])
-    const [dataWeather, setDataWeather] = useState(null);
+    const [dataWeather, setDataWeather] = useState({});
     const [formValue, setFormValue] = useState({ location: "" });
-    const [error, setError] = useState("");
     const handleFormValueChange = (event) => {
         setFormValue({ ...formValue, location: event.target.value })
     }
 
     const handleFetch = async (event) => {
-        try {
-            event.preventDefault();
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${formValue.location}&units=metric&appid=be7c2643f6fe0c32eb7fe5035e5c8aa5`);
-            const data = await response.json();
-            console.log(data);
-            setDataWeather(data)
-            setFormValue({ location: "" })
-        }
-        catch (err) {
-            setError("Khong tim thay")
-        }
+        event.preventDefault();
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${formValue.location}&units=metric&appid=be7c2643f6fe0c32eb7fe5035e5c8aa5`)
+            .then((response) => {
+                return response.json()
+            }).then((data) => {
+                setDataWeather(data);
+                setFormValue({ location: "" })
+            })
     }
 
 
 
     return (
         <div className='inputsearch d-flex flex-column'>
-            <form style={{ marginBottom: "20px" }}>
+            <form>
                 <input name="location" value={formValue.location} onChange={handleFormValueChange} type='text' placeholder='Enter Your Location'></input>
-                <button id="search-btn" type="submit" onClick={handleFetch} class="btn btn-success"><i class="bi bi-search-heart-fill"></i></button>
+                <button id="search-btn" type="submit" onClick={handleFetch} className="btn btn-success"><i className="bi bi-search-heart-fill"></i></button>
             </form >
-           
             {
                 dataWeather && dataWeather.name ? (
                     <div>
@@ -87,6 +82,9 @@ function InputSearch() {
                         <b> Humidity {dataWeather["main"]["humidity"]}</b>
                     </div>) : (<div></div>)
             }
+            {dataWeather.message === "city not found" ? (<div><div>Can not find location
+
+            </div><img style={{ width: "100px", height: "100px" }} src={sad}></img></div>) : (<></>)}
         </div >
     )
 }
